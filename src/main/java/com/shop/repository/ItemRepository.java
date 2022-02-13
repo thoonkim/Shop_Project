@@ -3,6 +3,7 @@ package com.shop.repository;
 import com.shop.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 
 //ItemRepository인터페이스를 작성한 것만으로 상품 테이블에 데이터를 insert할 수 있다. Spring Data JPA는 이렇게 인터페이스만 작성하면
 //런타임 시점에 자바의 Dynamic Proxy를 이용해서 객체를 동적으로 생성해준다. 따로 Data Access Object(Dao)와 xml 파일에 쿼리문을 작성하지 않아도 된다.
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
     
     //itemNm(상품명)으로 뎅치터를 조회하기 위해 By뒤에 필드명인 itemNm을 메소드의 이름에 붙여줍니다. 엔티티명은 생략이 가능하므로
     //finditemByItemNm 대신 findByItemNm으로 메소드명을 만들어준다. 매개 변수로는 검색할 때 사용할 상품명 변수를 넘겨준다.
@@ -39,5 +40,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     //value 안에 네이티브 쿼리문을 작성하고 "nativeQuery=true"를 지정합니다.
     @Query(value = "select * from item i where i.item_detail like %:itemDetail% order by i.price desc", nativeQuery = true)
     List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
+
 
 }

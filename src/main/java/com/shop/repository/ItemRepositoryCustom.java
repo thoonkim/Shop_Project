@@ -1,0 +1,12 @@
+package com.shop.repository;
+
+import com.shop.dto.ItemSearchDto;
+import com.shop.entity.Item;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+/*1. querydsl을 spring data jpa와 함께 사용하기위한 사용자 정의 인터페이스를 작성한다.*/
+public interface ItemRepositoryCustom {
+    /*상품 조회 조건을 담고 있는 itemSearchDto 객체와 페이징 정보를 담고 있는 pageable 객체를 파라미터로 받는 getAdminitemPage 메소드*/
+    Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
+}
