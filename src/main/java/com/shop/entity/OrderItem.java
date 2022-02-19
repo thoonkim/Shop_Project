@@ -40,7 +40,12 @@ public class OrderItem extends BaseEntity {
     }
     
     /*주문 가격과 주문 수량을 곱해 해당 상품을 주문한 총 가격을 계산하는 메소드*/
-    public int getTotalprice(){
+    public int getTotalprice() {
         return orderPrice*count;
+    }
+
+    /*주문 취소 시 주문 수량만큼 상품에 재고를 더해준다.*/
+    public void cancel() {
+        this.getItem().addStock(count);
     }
 }
