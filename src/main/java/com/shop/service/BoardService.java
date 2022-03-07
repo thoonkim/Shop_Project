@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service // 서비스 클래스임을 나타냄
+@Service // 서비스 클래스임을 나타냄 //보드서비스
 public class BoardService {
 
     @Autowired // 스프링부트가 자동으로 객체를 주입해준다.
